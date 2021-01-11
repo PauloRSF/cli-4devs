@@ -3,7 +3,7 @@ use clap::{App, AppSettings};
 mod constants;
 mod generators;
 
-use generators::{cpf, zip_code};
+use generators::{cpf, zip_code, credit_card};
 
 fn main() {
     let app_args = App::new("4Devs CLI")
@@ -14,6 +14,7 @@ fn main() {
         .setting(AppSettings::ArgRequiredElseHelp)
         .subcommand(cpf::build_args())
         .subcommand(zip_code::build_args())
+        .subcommand(credit_card::build_args())
         .get_matches();
 
     let (sub, sub_args) = app_args.subcommand().unwrap();
@@ -21,6 +22,7 @@ fn main() {
     match sub {
         "cpf" => cpf::execute(sub_args),
         "zip_code" => zip_code::execute(sub_args),
+        "credit_card" => credit_card::execute(sub_args),
         _ => (),
     }
 }
